@@ -11,28 +11,28 @@ class App extends React.Component {
     super();
 
     this.addFish = this.addFish.bind(this);
-    // this.removeFish = this.removeFish.bind(this);
-    // this.updateFish = this.updateFish.bind(this);
-    // this.loadSamples = this.loadSamples.bind(this);
+    this.removeFish = this.removeFish.bind(this);
+    this.updateFish = this.updateFish.bind(this);
+    this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
 
+    // getinitialState
+    this.state = {
+      fishes: {},
+      order: {}
+    };
   }
-
-  state = {
-    fishes: {},
-    order: {}
-  };
 
   componentWillMount() {
     // this runs right before the <App> is rendered
-    this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
+    this.ref = base.syncState(`${this.props.params.calId}/fishes`, {
       context: this,
       state: 'fishes'
     });
 
     // check if there is any order in localStorage
-    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+    const localStorageRef = localStorage.getItem(`order-${this.props.params.calId}`);
 
     if(localStorageRef) {
       // update our App component's order state
@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order));
+    localStorage.setItem(`order-${this.props.params.calId}`, JSON.stringify(nextState.order));
   }
 
   addFish(fish) {
@@ -61,23 +61,23 @@ class App extends React.Component {
     this.setState({ fishes });
   }
 
-  updateFish = (key, updatedFish) => {
+  updateFish(key, updatedFish) {
     const fishes = {...this.state.fishes};
     fishes[key] = updatedFish;
     this.setState({ fishes });
-  };
+  }
 
-  removeFish = (key) => {
+  removeFish(key) {
     const fishes = {...this.state.fishes};
     fishes[key] = null;
     this.setState({ fishes });
-  };
+  }
 
-  loadSamples = () => {
+  loadSamples() {
     this.setState({
       fishes: sampleFishes
     });
-  };
+  }
 
   addToOrder(key) {
     // take a copy of our state
@@ -119,7 +119,6 @@ class App extends React.Component {
           loadSamples={this.loadSamples}
           fishes={this.state.fishes}
           updateFish={this.updateFish}
-          storeId={this.props.params.storeId}
         />
       </div>
     )
