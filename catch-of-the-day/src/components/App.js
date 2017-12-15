@@ -1,10 +1,12 @@
 import React from 'react';
+// import Order from './Order';
 import Header from './Header';
-import Order from './Order';
 import Inventory from './Inventory';
 import Fish from './Fish';
 import sampleFishes from '../sample-fishes';
 import base from '../base';
+import DayPicker from './DayPicker';
+import Plan from './Plan';
 
 class App extends React.Component {
   constructor() {
@@ -34,11 +36,9 @@ class App extends React.Component {
     // check if there is any order in localStorage
     const localStorageRef = localStorage.getItem(`order-${this.props.params.calId}`);
 
-    if(localStorageRef) {
+    if (localStorageRef) {
       // update our App component's order state
-      this.setState({
-        order: JSON.parse(localStorageRef)
-      });
+      this.setState({order: JSON.parse(localStorageRef)});
     }
 
   }
@@ -53,75 +53,76 @@ class App extends React.Component {
 
   addFish(fish) {
     // update our state
-    const fishes = {...this.state.fishes};
+    const fishes = {
+      ...this.state.fishes
+    };
     // add in our new fish
     const timestamp = Date.now();
     fishes[`fish-${timestamp}`] = fish;
     // set state
-    this.setState({ fishes });
+    this.setState({fishes});
   }
 
   updateFish(key, updatedFish) {
-    const fishes = {...this.state.fishes};
+    const fishes = {
+      ...this.state.fishes
+    };
     fishes[key] = updatedFish;
-    this.setState({ fishes });
+    this.setState({fishes});
   }
 
   removeFish(key) {
-    const fishes = {...this.state.fishes};
+    const fishes = {
+      ...this.state.fishes
+    };
     fishes[key] = null;
-    this.setState({ fishes });
+    this.setState({fishes});
   }
 
   loadSamples() {
-    this.setState({
-      fishes: sampleFishes
-    });
+    this.setState({fishes: sampleFishes});
   }
 
   addToOrder(key) {
     // take a copy of our state
-    const order = {...this.state.order};
+    const order = {
+      ...this.state.order
+    };
     // update or add the new number of fish ordered
     order[key] = order[key] + 1 || 1;
     // update our state
-    this.setState({ order });
+    this.setState({order});
   }
 
   removeFromOrder(key) {
-    const order = {...this.state.order};
+    const order = {
+      ...this.state.order
+    };
     delete order[key];
-    this.setState({ order });
+    this.setState({order});
   }
 
   render() {
-    return (
-      <div className="catch-of-the-day">
-        <div className="menu">
-          <Header tagline="Fresh Seafood Market" />
-          <ul className="list-of-fishes">
-            {
-              Object
-                .keys(this.state.fishes)
-                .map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)
-            }
-          </ul>
-        </div>
-        <Order
-          fishes={this.state.fishes}
-          order={this.state.order}
-          params={this.props.params}
-          removeFromOrder={this.removeFromOrder}
-        />
-        <Inventory
-          addFish={this.addFish}
-          removeFish={this.removeFish}
-          loadSamples={this.loadSamples}
-          fishes={this.state.fishes}
-          updateFish={this.updateFish}
-        />
+    return (<div className="catch-of-the-day">
+      <div>
+        <DayPicker/>
+        <p>No earlier than:</p>
+        <Plan/>
+
+        <br/>
+        <br/>
+
+        <p>No later than:</p>
+        <Plan/>
       </div>
-    )
+      <div>
+        <ul className="list-of-fishes">
+          {Object.keys(this.state.fishes).map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)}
+        </ul>
+      </div>
+      <Inventory addFish={this.addFish} removeFish={this.removeFish} loadSamples={this.loadSamples} fishes={this.state.fishes} updateFish={this.updateFish}/>
+
+    </div>)
   }
 }
 

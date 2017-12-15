@@ -9,13 +9,26 @@
     "stylus": "^0.54.5"
   },
   "dependencies": {
-    "history": "4.2.0",
+    "create-react-class": "^15.6.2",
+    "history": "^4.2.0",
+    "prop-types": "^15.6.0",
     "re-base": "2.2.0",
     "react": "15.3.2",
     "react-addons-css-transition-group": "15.3.2",
     "react-day-picker": "^7.0.5",
     "react-dom": "15.3.2",
-    "react-router": "4.0.0-alpha.3"
+    "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.6",
+    "react-router": "4.0.0-alpha.3",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-select": "^1.1.0",
+    "react-virtualized": "^9.13.0",
+    "react-virtualized-select": "^3.1.0",
+    "reactackle": "^1.0.0-beta.3",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^2.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
