@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DayRange from '../../components/DayRange'
+import DayPicker from '../../components/DayPicker'
 import {
 Form,
 Button,
@@ -81,7 +81,7 @@ export class PlanStart extends Component {
         label="No later than:"
       />
 
-      <DayRange/>
+      <DayPicker/>
       </div>
     );
   }

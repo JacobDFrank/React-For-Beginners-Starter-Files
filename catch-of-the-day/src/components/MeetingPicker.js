@@ -1,11 +1,7 @@
 import React from 'react';
 import { getFunName } from '../helpers';
 
-class StorePicker extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.goToStore = this.goToStore.bind(this);
-  // }
+class MeetingPicker extends React.Component {
   goToStore(event) {
     event.preventDefault();
     console.log('You Changed the URL');
@@ -20,16 +16,16 @@ class StorePicker extends React.Component {
     // Any where else
     return (
       <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
-        <h2>Please Enter A Store</h2>
+        <h2>Please Enter A Meeting Title</h2>
         <input type="text" required placeholder="Store Name" defaultValue={getFunName()} ref={(input) => { this.storeInput = input}} />
-        <button type="submit">Visit Store →</button>
+        <button type="submit">Visit Meeting →</button>
       </form>
     )
   }
 }
 
-StorePicker.contextTypes = {
+MeetingPicker.contextTypes = {
   router: React.PropTypes.object
 }
 
-export default StorePicker;
+export default MeetingPicker;

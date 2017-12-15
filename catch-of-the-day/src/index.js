@@ -7,8 +7,9 @@ import App from './components/App';
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
-import StorePicker from './components/StorePicker';
+import MeetingPicker from './components/MeetingPicker';
 import NotFound from './components/NotFound';
+
 
 import {
   injectGlobalStyle,
@@ -25,8 +26,8 @@ const Root = () => {
     <ConnectedRouter history={history}>
     <BrowserRouter>
       <div>
-        <Helmet title="You Are Doing Great" />
-        <Match exactly pattern="/" component={StorePicker} />
+        <Helmet title="When2Meet2.0" />
+        <Match exactly pattern="/" component={MeetingPicker} />
         <Match pattern="/store/:calId" component={App} />
         <Miss component={NotFound} />
       </div>
